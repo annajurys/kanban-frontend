@@ -1,0 +1,64 @@
+.task-list {
+  margin: 10px;
+  width: 400px;
+  height: 300px;
+  overflow-y: auto;
+}
+
+.mat-card-title {
+  margin-bottom: 25px;
+  text-align: center;
+}
+
+.example-form-field {
+  width: 300px;
+  padding-right: 10px;
+}
+
+.add-new {
+  width: 350px;
+  height: fit-content;
+  margin: 30px auto auto auto;
+}
+
+.date-input {
+  width: 300px;
+  padding-right: 10px;
+}
+
+.example-box {
+  width: 100%;
+  margin-bottom: 5px;
+  background-color: gray;
+}
+
+.cdk-drag-placeholder {
+  opacity: 0;
+}
+
+.cdk-drag-animating {
+  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+.example-box.cdk-drag-animating {
+  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+.example-chip .cdk-drop-list-dragging {
+  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: 1.5fr 0.9fr;
+  grid-template-rows: 1.5fr 0.9fr;
+  gap: 0 10px;
+  overflow-y: auto;
+  grid-template-areas:
+    "title date"
+    "content content";
+}
+
+.title { grid-area: title; }
+.date { grid-area: date; }
+.content { grid-area: content; }

@@ -1,0 +1,124 @@
+
+  <mat-card class="add-new">
+    <mat-card-title>Add To Do Item</mat-card-title>
+    <mat-form-field class="example-form-field">
+      <mat-label>Task title</mat-label>
+      <input matInput type="text" [(ngModel)]="value1" #title>
+      <button mat-button *ngIf="value1" matSuffix mat-icon-button aria-label="Clear" (click)="value1=''">
+        <mat-icon>close</mat-icon>
+      </button>
+    </mat-form-field>
+    <br>
+    <mat-form-field class="example-form-field">
+      <mat-label>Task</mat-label>
+      <input matInput type="text" [(ngModel)]="value2" #content>
+      <button mat-button *ngIf="value2" matSuffix mat-icon-button aria-label="Clear" (click)="value2=''">
+        <mat-icon>close</mat-icon>
+      </button>
+    </mat-form-field>
+    <br>
+    <mat-form-field appearance="fill" class="date-input">
+      <mat-label>Enter a date range</mat-label>
+      <mat-date-range-input [rangePicker]="picker">
+        <input matStartDate placeholder="Start date" #startDate>
+        <input matEndDate placeholder="End date" #endDate>
+      </mat-date-range-input>
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-date-range-picker #picker></mat-date-range-picker>
+    </mat-form-field>
+    <br>
+    <section>
+      <div class="example-button-row">
+        <button mat-raised-button color="accent"
+                (click)="addTask(title.value, content.value, startDate.value, endDate.value);
+                 content.value=''; title.value=''; startDate.value=''; endDate.value='';">
+          Add
+        </button>
+      </div>
+    </section>
+  </mat-card>
+
+
+  <mat-grid-list cols="3" rowHeight="3:3">
+    <mat-grid-tile>
+      <mat-card class="task-list">
+        <div class="drag-container">
+          <mat-card-title>To Do</mat-card-title>
+          <mat-chip-list class="example-chip" cdkDropList #toDoList="cdkDropList" [cdkDropListData]="tasksTodo"
+                         [cdkDropListConnectedTo]="[doingList,doneList]"
+                         class="item-list" (cdkDropListDropped)="drop($event, '1')">
+            <mat-card class="example-box" *ngFor="let task of tasksTodo" cdkDrag>
+              <div class="grid-container">
+                <div class="mat-h2 title">{{task.title}}</div>
+                <div class="date">
+                  <button mat-button matSuffix mat-icon-button aria-label="Clear" (click)="editTask(task)">
+                    Edit
+                  </button>
+                  <button mat-button matSuffix mat-icon-button aria-label="Clear" (click)="deleteTask(task)">
+                    <mat-icon>close</mat-icon>
+                  </button>
+                  {{task.startDate}}
+                  {{task.endDate}}
+                </div>
+                <div class="content">{{task.content}}</div>
+              </div>
+            </mat-card>
+          </mat-chip-list>
+        </div>
+      </mat-card>
+    </mat-grid-tile>
+    <mat-grid-tile>
+      <mat-card class="task-list">
+        <div class="drag-container">
+          <mat-card-title>Doing</mat-card-title>
+          <mat-chip-list class="example-chip" cdkDropList #doingList="cdkDropList" [cdkDropListData]="tasksDoing"
+                         [cdkDropListConnectedTo]="[toDoList,doneList]"
+                         class="item-list" (cdkDropListDropped)="drop($event, '2')">
+            <mat-card class="example-box" *ngFor="let task of tasksDoing" cdkDrag>
+              <div class="grid-container">
+                <div class="mat-h2 title">{{task.title}}</div>
+                <div class="date">
+                  <button mat-button matSuffix mat-icon-button aria-label="Clear" (click)="editTask(task)">
+                    Edit
+                  </button>
+                  <button mat-button matSuffix mat-icon-button aria-label="Clear" (click)="deleteTask(task)">
+                    <mat-icon>close</mat-icon>
+                  </button>
+                  {{task.startDate}}
+                  {{task.endDate}}
+                </div>
+                <div class="content">{{task.content}}</div>
+              </div>
+            </mat-card>
+          </mat-chip-list>
+        </div>
+      </mat-card>
+    </mat-grid-tile>
+    <mat-grid-tile>
+      <mat-card class="task-list">
+        <div class="drag-container">
+          <mat-card-title>Done</mat-card-title>
+          <mat-chip-list class="example-chip" cdkDropList #doneList="cdkDropList" [cdkDropListData]="tasksDone"
+                         [cdkDropListConnectedTo]="[doingList,toDoList]"
+                         class="item-list" (cdkDropListDropped)="drop($event, '3')">
+            <mat-card class="example-box" *ngFor="let task of tasksDone" cdkDrag>
+              <div class="grid-container">
+                <div class="mat-h2 title">{{task.title}}</div>
+                <div class="date">
+                  <button mat-button matSuffix mat-icon-button aria-label="Clear" (click)="editTask(task)">
+                    Edit
+                  </button>
+                  <button mat-button matSuffix mat-icon-button aria-label="Clear" (click)="deleteTask(task)">
+                    <mat-icon>close</mat-icon>
+                  </button>
+                  {{task.startDate}}
+                  {{task.endDate}}
+                </div>
+                <div class="content">{{task.content}}</div>
+              </div>
+            </mat-card>
+          </mat-chip-list>
+        </div>
+      </mat-card>
+    </mat-grid-tile>
+  </mat-grid-list>
